@@ -38,18 +38,33 @@ const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY,
 });
 
+// メンバー一覧
 export const getMembersList = async (queries?: MicroCMSQueries) => {
-  const listData = await client.getList<Member>({
+  const membersListData = await client.getList<Member>({
     endpoint: "members",
     queries,
   });
-  return listData;
+  return membersListData;
 };
 
+// ニュース一覧
 export const getNewsList = async (queries?: MicroCMSQueries) => {
-  const listData = await client.getList<News>({
+  const newsListData = await client.getList<News>({
     endpoint: "news",
     queries,
   });
-  return listData;
+  return newsListData;
+};
+
+// ニュース詳細
+export const getNewsDetail = async (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
+  const newsDetailData = await client.getListDetail<News>({
+    endpoint: 'news',
+    contentId,
+    queries,
+  });
+  return newsDetailData;
 };
