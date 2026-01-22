@@ -25,6 +25,7 @@ export type News = {
   category: Category;
 } & MicroCMSListContent;
 
+// エラー
 if(!process.env.MICROCMS_SERVICE_DOMAIN) {
   throw new Error("MICROCMS_SERVICE_DOMAIN is Required");
 }
@@ -39,7 +40,9 @@ const client = createClient({
 });
 
 // メンバー一覧
-export const getMembersList = async (queries?: MicroCMSQueries) => {
+export const getMembersList = async (
+  queries?: MicroCMSQueries
+) => {
   const membersListData = await client.getList<Member>({
     endpoint: "members",
     queries,
@@ -48,7 +51,9 @@ export const getMembersList = async (queries?: MicroCMSQueries) => {
 };
 
 // ニュース一覧
-export const getNewsList = async (queries?: MicroCMSQueries) => {
+export const getNewsList = async (
+  queries?: MicroCMSQueries
+) => {
   const newsListData = await client.getList<News>({
     endpoint: "news",
     queries,
@@ -67,4 +72,17 @@ export const getNewsDetail = async (
     queries,
   });
   return newsDetailData;
+};
+
+// カテゴリー
+export const getCategoryDetail = async (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
+  const ctgDetailData = await client.getListDetail<Category>({
+    endpoint: 'categories',
+    contentId,
+    queries,
+  });
+  return ctgDetailData;
 };
