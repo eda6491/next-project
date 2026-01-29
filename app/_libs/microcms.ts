@@ -91,3 +91,19 @@ export const getCategoryDetail = async (
   });
   return ctgDetailData;
 };
+
+// ニュースを全て取得
+export const getAllNewsList = async () => {
+  const newsListData = await client.getAllContents<News>({
+    endpoint: "news",
+  });
+  return newsListData;
+};
+
+// カテゴリーを全て取得
+export const getAllCategoryList = async () => {
+  const categoryListData = await client.getAllContents<Category>({
+    endpoint: "categories",
+  });
+  return categoryListData;
+};
